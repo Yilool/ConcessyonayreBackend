@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +23,7 @@ import javax.persistence.OneToOne;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.concesionarie.concesyonarye.model.enumerate.UserRoles;
@@ -29,78 +31,187 @@ import com.concesionarie.concesyonarye.model.enumerate.UserRoles;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @SuppressWarnings("serial")
-public class User implements UserDetails{
+public class User implements UserDetails {
+	private static final int MAX_AUTH_ATTEMPTS = 3;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(unique = true)
 	private String username;
-	
+
 	private String password;
-	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
 	private Set<UserRoles> roles;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
 	private Customer customer;
-	
+
 	@CreatedDate
 	private LocalDateTime createTime;
-	
+
 	private LocalDateTime deleteTime;
-	
+
 	private LocalDateTime lastPasswordChange;
-	
+
 	private LocalDateTime passwordPolicyExpDate;
-	
+
+	private int authenticationAttempts;
+
 	public User() {
 		this.roles = new HashSet<>();
 		this.roles.add(UserRoles.CUSTOM);
+		this.customer = new Customer();
+		this.createTime = LocalDateTime.now();
+		this.deleteTime = null;
+		this.lastPasswordChange = LocalDateTime.now();
+		this.passwordPolicyExpDate = LocalDateTime.now().plusMonths(1);
 	}
-	
+
+	public User(String username, String password, UserRoles rol, String name, String surname, String bank,
+			String address, String phone, String dni) {
+		this.username = username;
+		this.password = password;
+		this.roles = new HashSet<>();
+		this.roles.add(rol);
+		this.customer = new Customer(name, surname, bank, address, phone, dni, this);
+		this.createTime = LocalDateTime.now();
+		this.deleteTime = null;
+		this.lastPasswordChange = LocalDateTime.now();
+		this.passwordPolicyExpDate = LocalDateTime.now().plusMonths(1);
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return roles.stream().map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.name())).collect(Collectors.toList());
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.password;
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.username;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean expired = false;
+
+		if (LocalDateTime.now().isAfter(passwordPolicyExpDate)) {
+			expired = true;
+		}
+
+		return expired;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean locked = false;
+		
+		if (this.authenticationAttempts <= MAX_AUTH_ATTEMPTS) {
+			locked = true;
+		}
+		
+		return locked;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean expired = false;
+
+		if (LocalDateTime.now().isBefore(passwordPolicyExpDate)) {
+			expired = true;
+		}
+
+		return expired;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean enabled = false;
+
+		if (this.isAccountNonExpired() && this.isAccountNonLocked() && this.isCredentialsNonExpired()) {
+			enabled = true;
+		}
+		return enabled;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Set<UserRoles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UserRoles> roles) {
+		this.roles = roles;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public LocalDateTime getDeleteTime() {
+		return deleteTime;
+	}
+
+	public void setDeleteTime(LocalDateTime deleteTime) {
+		this.deleteTime = deleteTime;
+	}
+
+	public LocalDateTime getLastPasswordChange() {
+		return lastPasswordChange;
+	}
+
+	public void setLastPasswordChange(LocalDateTime lastPasswordChange) {
+		this.lastPasswordChange = lastPasswordChange;
+	}
+
+	public LocalDateTime getPasswordPolicyExpDate() {
+		return passwordPolicyExpDate;
+	}
+
+	public void setPasswordPolicyExpDate(LocalDateTime passwordPolicyExpDate) {
+		this.passwordPolicyExpDate = passwordPolicyExpDate;
+	}
+
+	public int getAuthenticationAttempts() {
+		return authenticationAttempts;
+	}
+
+	public void setAuthenticationAttempts(int authenticationAttempts) {
+		this.authenticationAttempts = authenticationAttempts;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

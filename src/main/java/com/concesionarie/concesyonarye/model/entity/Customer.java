@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.concesionarie.concesyonarye.segurity.model.entity.User;
+
 @Entity
 public class Customer {
 	@Id

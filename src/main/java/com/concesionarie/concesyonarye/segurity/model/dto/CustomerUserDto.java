@@ -1,4 +1,4 @@
-package com.concesionarie.concesyonarye.model.dto;
+package com.concesionarie.concesyonarye.segurity.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

@@ -27,7 +27,7 @@ public class Category {
 	}
 	
 	public Category(String name) {
-		this.categoryName = name;
+		this.categoryName = name.toUpperCase();
 		this.startDate = LocalDate.now();
 		this.finishDate = null;
 	}

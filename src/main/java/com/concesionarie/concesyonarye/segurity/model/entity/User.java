@@ -1,4 +1,4 @@
-package com.concesionarie.concesyonarye.model.entity;
+package com.concesionarie.concesyonarye.segurity.model.entity;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -26,7 +26,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.concesionarie.concesyonarye.model.enumerate.UserRoles;
+import com.concesionarie.concesyonarye.model.entity.Customer;
+import com.concesionarie.concesyonarye.segurity.model.enumerate.UserRoles;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -72,17 +73,20 @@ public class User implements UserDetails {
 		this.passwordPolicyExpDate = LocalDateTime.now().plusMonths(1);
 	}
 
-	public User(String username, String password, UserRoles rol, String name, String surname, String bank,
-			String address, String phone, String dni) {
+	public User(String username, String password, UserRoles rol) {
+		this();
 		this.username = username;
 		this.password = password;
 		this.roles = new HashSet<>();
 		this.roles.add(rol);
+	}
+	
+	public User(String username, String password, String name, String surname, String bank,
+			String address, String phone, String dni) {
+		this();
+		this.username = username;
+		this.password = password;
 		this.customer = new Customer(name, surname, bank, address, phone, dni, this);
-		this.createTime = LocalDateTime.now();
-		this.deleteTime = null;
-		this.lastPasswordChange = LocalDateTime.now();
-		this.passwordPolicyExpDate = LocalDateTime.now().plusMonths(1);
 	}
 
 	@Override
@@ -102,45 +106,46 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		Boolean expired = false;
+//		Boolean expired = false;
+//
+//		if (LocalDateTime.now().isAfter(passwordPolicyExpDate)) {
+//			expired = true;
+//		}
 
-		if (LocalDateTime.now().isAfter(passwordPolicyExpDate)) {
-			expired = true;
-		}
-
-		return expired;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		Boolean locked = false;
+//		Boolean locked = false;
+//		
+//		if (this.authenticationAttempts <= MAX_AUTH_ATTEMPTS) {
+//			locked = true;
+//		}
 		
-		if (this.authenticationAttempts <= MAX_AUTH_ATTEMPTS) {
-			locked = true;
-		}
-		
-		return locked;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		Boolean expired = false;
+//		Boolean expired = false;
+//
+//		if (LocalDateTime.now().isBefore(passwordPolicyExpDate)) {
+//			expired = true;
+//		}
 
-		if (LocalDateTime.now().isBefore(passwordPolicyExpDate)) {
-			expired = true;
-		}
-
-		return expired;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		Boolean enabled = false;
-
-		if (this.isAccountNonExpired() && this.isAccountNonLocked() && this.isCredentialsNonExpired()) {
-			enabled = true;
-		}
-		return enabled;
+//		Boolean enabled = false;
+//
+//		if (this.isAccountNonExpired() && this.isAccountNonLocked() && this.isCredentialsNonExpired()) {
+//			enabled = true;
+//		}
+		
+		return true;
 	}
 
 	public Integer getId() {

@@ -39,7 +39,7 @@ public class Model {
 	}
 	
 	public Model(String name, Brand brand, Category category) {
-		this.modelName = name;
+		this.modelName = name.toUpperCase();
 		this.startDate = LocalDate.now();
 		this.finishDate = null;
 		this.brand = brand;

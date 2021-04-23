@@ -27,7 +27,7 @@ public class Brand {
 	}
 	
 	public Brand(String name) {
-		this.brandName = name;
+		this.brandName = name.toUpperCase();
 		this.startDate = LocalDate.now();
 		this.finishDate = null;
 	}

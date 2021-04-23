@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Rating {
@@ -15,11 +17,19 @@ public class Rating {
 	
 	private String comment;
 	
+	@ManyToOne
+	@JoinColumn(name = "CustomerId")
+	private Customer customer;
+	
+	@ManyToOne
+	@JoinColumn(name = "VehicleId")
+	private Vehicle vehicle;
+	
 	public Rating() { }
 	
-	public Rating(int rate, String msg) {
-		this.rate = rate;
-		this.comment = msg;
+	public Rating(Vehicle vehicle, Customer customer) {
+		this.vehicle = vehicle;
+		this.customer = customer;
 	}
 
 	public Integer getId() {

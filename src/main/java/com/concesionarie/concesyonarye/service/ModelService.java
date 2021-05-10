@@ -32,7 +32,7 @@ public class ModelService {
 			model = modelDtoConverter.fromModelDTOToModel(modelDto);
 		}
 		
-		return modelDtoConverter.fromModelToModelDto(model);
+		return modelDtoConverter.fromModelToModelDto(modelRepository.save(model));
 	}
 	
 	public ModelDto deleteModel(String code) throws ModelException {

@@ -46,12 +46,13 @@ public class Vehicle {
 		this.rating = new ArrayList<>();
 	}
 	
-	public Vehicle(String enrollment, double price, int seats, Fuel fuel) { 
+	public Vehicle(double price, int seats, Fuel fuel, Model model) { 
 		this.rating = new ArrayList<>();
-		this.enrollment = enrollment;
 		this.basePrice = price;
 		this.userseats = seats;
 		this.fuel = fuel;
+		this.enrollment = null;
+		this.model = model;
 	}
 
 	public Integer getId() {
@@ -67,7 +68,7 @@ public class Vehicle {
 	}
 
 	public void setEnrollment(String enrollment) {
-		this.enrollment = enrollment;
+		this.enrollment = enrollment.toUpperCase();
 	}
 
 	public double getBasePrice() {
@@ -100,5 +101,21 @@ public class Vehicle {
 
 	public void setModel(Model model) {
 		this.model = model;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
+	public List<Rating> getRating() {
+		return rating;
+	}
+
+	public void setRating(List<Rating> rating) {
+		this.rating = rating;
 	}
 }

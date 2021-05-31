@@ -35,7 +35,7 @@ public class CategoryService {
 	}
 	
 	public CategoryDto deleteCategory(String code) throws CategoryException {
-		Category category = categoryRepository.findCategoryById(Integer.parseInt(code.substring(0)));
+		Category category = categoryRepository.findCategoryById(Integer.parseInt(code.substring(4)));
 		
 		if (category == null) {
 			throw new CategoryException(ExceptionsCode.CATEGORY_NOT_EXISTS);

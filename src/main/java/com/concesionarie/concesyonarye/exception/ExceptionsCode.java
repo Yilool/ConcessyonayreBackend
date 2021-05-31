@@ -22,7 +22,24 @@ public enum ExceptionsCode {
 	/* Model code */
 	NOT_MODELS("There aren't models in the application"),
 	MODEL_EXISTS("The model already exist in the aplication"),
-	MODEL_NOT_EXISTS("The model not exist in the aplication");
+	MODEL_NOT_EXISTS("The model not exist in the aplication"),
+	
+	/* Vehicle code */
+	NOT_VEHICLES("There aren't vehicles in the application"),
+	VEHICLE_EXISTS("The vehicle already exist in the aplication"),
+	VEHICLE_NOT_EXISTS("The vehicle not exist in the aplication"),
+	
+	/* Promotion code */
+	NOT_PROMOTIONS("There aren't promotions in the application"),
+	PROMOTION_EXISTS("The promotion already exist in the aplication"),
+	PROMOTION_NOT_EXISTS("The promotion not exist in the aplication"),
+	
+	/* Customer code */
+	CUSTOMER_NOT_EXISTS("The customer not exist in the aplication"),
+	
+	/* Purchase code */
+	VEHICLE_SELLED("This vehicle was selled"),
+	ENROLLMENT_USED("There are a vehicle with that enrollment");
 	
 	private final String message;
 	

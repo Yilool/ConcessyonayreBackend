@@ -1,0 +1,15 @@
+package com.concesionarie.concesyonarye.exception;
+
+@SuppressWarnings("serial")
+public class PurchaseException extends Exception{
+	private final ExceptionsCode code;
+
+	public PurchaseException(ExceptionsCode cod) {
+		super();
+		this.code = cod;
+	}
+
+	public ExceptionsCode getCode() {
+		return code;
+	}
+}

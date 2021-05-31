@@ -13,25 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.concesionarie.concesyonarye.exception.CategoryException;
-import com.concesionarie.concesyonarye.exception.ModelException;
-import com.concesionarie.concesyonarye.model.dto.ModelDto;
-import com.concesionarie.concesyonarye.service.ModelService;
+import com.concesionarie.concesyonarye.exception.PromotionException;
+import com.concesionarie.concesyonarye.model.dto.PromotionDto;
+import com.concesionarie.concesyonarye.service.PromotionService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/model")
-public class ModelController {
+@RequestMapping("/promotion")
+public class PromotionController {
 	@Autowired
-	private ModelService ModelService;
+	private PromotionService promotionService;
 	
 	@PostMapping
-	public ResponseEntity<?> newModel(@RequestBody ModelDto modelDto) {
+	public ResponseEntity<?> newPromotion(@RequestBody PromotionDto promotionDto) {
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(ModelService.registerNewModel(modelDto));
-		} catch (ModelException e) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getCode());
-		} catch (CategoryException e) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(promotionService.registerNewPromotion(promotionDto));
+		} catch (PromotionException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getCode());
 		} catch(Exception ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -39,10 +36,10 @@ public class ModelController {
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<?> deleteModel(@PathVariable String code) {
+	public ResponseEntity<?> deletePromotion(@PathVariable String code) {
 		try {
-			return ResponseEntity.ok(ModelService.deleteModel(code));
-		} catch (ModelException e) {
+			return ResponseEntity.ok(promotionService.deletePromotion(code));
+		} catch (PromotionException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getCode());
 		} catch(Exception ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -50,10 +47,10 @@ public class ModelController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> getModels() {
+	public ResponseEntity<?> getPromotions() {
 		try {
-			return ResponseEntity.ok(ModelService.getAllModels());
-		} catch (ModelException e) {
+			return ResponseEntity.ok(promotionService.getAllPromotions());
+		} catch (PromotionException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getCode());
 		} catch(Exception ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

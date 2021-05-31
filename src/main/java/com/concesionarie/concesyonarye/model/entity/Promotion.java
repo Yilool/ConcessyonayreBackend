@@ -33,7 +33,7 @@ public class Promotion {
 	}
 	
 	public Promotion(String name, int discount) {
-		this.promoname = name;
+		this.promoname = name.toUpperCase();
 		this.discountPercent = discount;
 		this.startDate = LocalDate.now();
 		this.finishDate = null;

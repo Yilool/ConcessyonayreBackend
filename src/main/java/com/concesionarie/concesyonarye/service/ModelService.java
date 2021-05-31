@@ -36,7 +36,7 @@ public class ModelService {
 	}
 	
 	public ModelDto deleteModel(String code) throws ModelException {
-		Model model = modelRepository.findModelById(Integer.parseInt(code.substring(0)));
+		Model model = modelRepository.findModelById(Integer.parseInt(code.substring(4)));
 		
 		if (model == null) {
 			throw new ModelException(ExceptionsCode.MODEL_NOT_EXISTS);

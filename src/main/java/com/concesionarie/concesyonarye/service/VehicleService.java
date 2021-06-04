@@ -14,8 +14,6 @@ import com.concesionarie.concesyonarye.model.dto.VehicleDto;
 import com.concesionarie.concesyonarye.model.entity.Vehicle;
 import com.concesionarie.concesyonarye.model.repository.VehicleRepository;
 
-import ch.qos.logback.core.pattern.Converter;
-
 @Service("VehicleService")
 public class VehicleService {
 	@Autowired

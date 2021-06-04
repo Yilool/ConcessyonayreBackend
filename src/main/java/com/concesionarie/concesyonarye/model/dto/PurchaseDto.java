@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class PurchaseDto {
 	private String vehicle;
 	
-	private int customer;
+	private String customer;
 	
 	private String enrollment;
 	
@@ -23,11 +23,11 @@ public class PurchaseDto {
 		this.vehicle = vehicle;
 	}
 
-	public int getCustomer() {
+	public String getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(int customer) {
+	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
 

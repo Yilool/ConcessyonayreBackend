@@ -38,6 +38,7 @@ public enum ExceptionsCode {
 	CUSTOMER_NOT_EXISTS("The customer not exist in the aplication"),
 	
 	/* Purchase code */
+	NOT_PURCHASES("There aren't purchases in the application"),
 	VEHICLE_SELLED("This vehicle was selled"),
 	ENROLLMENT_USED("There are a vehicle with that enrollment");
 	

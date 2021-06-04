@@ -1,11 +1,15 @@
 package com.concesionarie.concesyonarye.model.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.concesionarie.concesyonarye.exception.ExceptionsCode;
 import com.concesionarie.concesyonarye.exception.ModelException;
+import com.concesionarie.concesyonarye.model.dto.RatingDto;
 import com.concesionarie.concesyonarye.model.dto.VehicleDto;
 import com.concesionarie.concesyonarye.model.entity.Model;
 import com.concesionarie.concesyonarye.model.entity.Vehicle;
@@ -37,6 +41,7 @@ public class VehicleDtoConverter {
 	
 	public VehicleDto fromVehicleToVehicleDto(Vehicle vehicle) {
 		VehicleDto vehicleDto = new VehicleDto();
+		List<RatingDto> ratingDtos = new ArrayList<RatingDto>();
 		
 		vehicleDto.setCod(code + vehicle.getId());
 		vehicleDto.setBasePrice(vehicle.getBasePrice());
@@ -48,6 +53,20 @@ public class VehicleDtoConverter {
 		if (vehicle.getEnrollment() != null) {
 			vehicleDto.setEnrollment(vehicle.getEnrollment());
 		}
+		
+		vehicle.getRating().stream().forEach(rate -> {
+			RatingDto ratingDto = new RatingDto();
+			
+			ratingDto.setRate(rate.getRate());
+			ratingDto.setComment(rate.getComment());
+			
+			vehicleDto.setRate(vehicleDto.getRate() + rate.getRate());
+			
+			ratingDtos.add(ratingDto);
+		});
+		
+		vehicleDto.setRates(ratingDtos);
+		vehicleDto.setRate(vehicleDto.getRate() / vehicle.getRating().size());
 		
 		return vehicleDto;
 	}

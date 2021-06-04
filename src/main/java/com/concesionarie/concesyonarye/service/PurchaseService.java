@@ -14,6 +14,7 @@ import com.concesionarie.concesyonarye.exception.PurchaseException;
 import com.concesionarie.concesyonarye.exception.VehicleException;
 import com.concesionarie.concesyonarye.model.converter.CustomerDtoConverter;
 import com.concesionarie.concesyonarye.model.dto.CustomerDto;
+import com.concesionarie.concesyonarye.model.dto.MsgDto;
 import com.concesionarie.concesyonarye.model.dto.PurchaseDto;
 import com.concesionarie.concesyonarye.model.entity.Customer;
 import com.concesionarie.concesyonarye.model.entity.Promotion;
@@ -57,9 +58,10 @@ public class PurchaseService {
 		return customers;
 	}
 	
-	public String makePurchase(PurchaseDto purchaseDto) throws VehicleException, PurchaseException, CustomerException, PromotionException {
+	public MsgDto makePurchase(PurchaseDto purchaseDto) throws VehicleException, PurchaseException, CustomerException, PromotionException {
+		MsgDto msg = new MsgDto();
 		Vehicle vehicle = vehicleRepository.findVehicleById(Integer.parseInt(purchaseDto.getVehicle().substring(4)));
-		Customer customer = customerRepository.findCustomerById(purchaseDto.getCustomer());
+		Customer customer = customerRepository.findCustomerById(Integer.parseInt(purchaseDto.getCustomer().substring(4)));
 		Promotion promotion = promotionRepository.findPromotionById(Integer.parseInt(purchaseDto.getPromotion().substring(4)));
 		Purchase purchase;
 		
@@ -81,7 +83,9 @@ public class PurchaseService {
 		
 		purchaseRepository.save(purchase);
 		
-		return "The customer" + customer.getFullname() + "have buy the vehicle with the enrollment " + vehicle.getEnrollment();
+		msg.setMsg("The customer " + customer.getFullname() + " have buy the vehicle with the enrollment " + vehicle.getEnrollment());
+	
+		return msg;
 	}
 	
 	private void customerExist(Customer custom) throws CustomerException {
@@ -103,7 +107,7 @@ public class PurchaseService {
 	}
 	
 	private void vehicleSelled(Vehicle vehicle) throws PurchaseException {
-		if (vehicle.getEnrollment() == null) {
+		if (vehicle.getEnrollment() != null) {
 			throw new PurchaseException(ExceptionsCode.VEHICLE_SELLED);
 		}
 	}

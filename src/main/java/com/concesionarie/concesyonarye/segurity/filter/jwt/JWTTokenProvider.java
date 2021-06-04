@@ -22,6 +22,7 @@ private static SecretKey key;
 				.setId(user.getId().toString())
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.claim("username", user.getUsername())
+				.claim("cod", user.getCustomer().getId())
 				.claim("roles", user.getRoles())
 				.setExpiration(new Date(System.currentTimeMillis() + SecurityConstant.EXPIRATION_TIME))
 				.signWith(getKey(), SignatureAlgorithm.HS512)

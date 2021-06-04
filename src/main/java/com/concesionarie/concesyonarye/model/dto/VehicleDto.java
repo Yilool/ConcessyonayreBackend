@@ -1,5 +1,7 @@
 package com.concesionarie.concesyonarye.model.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -20,6 +22,10 @@ public class VehicleDto {
 	private byte[] imagen;
 	
 	private String model;
+	
+	private List<RatingDto> rates;
+	
+	private double rate;
 
 	public String getCod() {
 		return cod;
@@ -83,5 +89,21 @@ public class VehicleDto {
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+
+	public List<RatingDto> getRates() {
+		return rates;
+	}
+
+	public void setRates(List<RatingDto> rates) {
+		this.rates = rates;
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
 	}
 }

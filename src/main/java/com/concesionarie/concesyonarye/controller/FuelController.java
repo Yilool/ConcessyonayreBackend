@@ -11,10 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.concesionarie.concesyonarye.model.enumerate.Fuel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FuelController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/fuel")
 public class FuelController {
+	
+	/**
+	 * Gets the fuels.
+	 *
+	 * @return the fuels
+	 */
 	@GetMapping
 	public ResponseEntity<?> getFuels() {
 		ResponseEntity<?> response;

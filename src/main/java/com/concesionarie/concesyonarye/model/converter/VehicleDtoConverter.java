@@ -16,13 +16,27 @@ import com.concesionarie.concesyonarye.model.entity.Vehicle;
 import com.concesionarie.concesyonarye.model.enumerate.Fuel;
 import com.concesionarie.concesyonarye.model.repository.ModelRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VehicleDtoConverter.
+ */
 @Component
 public class VehicleDtoConverter {
+	
+	/** The Constant code. */
 	private static final String code = "VEH0";
 	
+	/** The model repository. */
 	@Autowired
 	private ModelRepository modelRepository;
 	
+	/**
+	 * From vehicle DTO to vehicle.
+	 *
+	 * @param vehicleDto the vehicle dto
+	 * @return the vehicle
+	 * @throws ModelException the model exception
+	 */
 	public Vehicle fromVehicleDTOToVehicle(VehicleDto vehicleDto) throws ModelException {
 		Vehicle vehicle;
 		
@@ -39,6 +53,12 @@ public class VehicleDtoConverter {
 		return vehicle;
 	}
 	
+	/**
+	 * From vehicle to vehicle dto.
+	 *
+	 * @param vehicle the vehicle
+	 * @return the vehicle dto
+	 */
 	public VehicleDto fromVehicleToVehicleDto(Vehicle vehicle) {
 		VehicleDto vehicleDto = new VehicleDto();
 		List<RatingDto> ratingDtos = new ArrayList<RatingDto>();

@@ -17,13 +17,25 @@ import com.concesionarie.concesyonarye.exception.PromotionException;
 import com.concesionarie.concesyonarye.model.dto.PromotionDto;
 import com.concesionarie.concesyonarye.service.PromotionService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PromotionController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/promotion")
 public class PromotionController {
+	
+	/** The promotion service. */
 	@Autowired
 	private PromotionService promotionService;
 	
+	/**
+	 * New promotion.
+	 *
+	 * @param promotionDto the promotion dto
+	 * @return the response entity
+	 */
 	@PostMapping
 	public ResponseEntity<?> newPromotion(@RequestBody PromotionDto promotionDto) {
 		try {
@@ -35,6 +47,12 @@ public class PromotionController {
 		}
 	}
 	
+	/**
+	 * Delete promotion.
+	 *
+	 * @param code the code
+	 * @return the response entity
+	 */
 	@DeleteMapping
 	public ResponseEntity<?> deletePromotion(@PathVariable String code) {
 		try {
@@ -46,6 +64,11 @@ public class PromotionController {
 		}
 	}
 	
+	/**
+	 * Gets the promotions.
+	 *
+	 * @return the promotions
+	 */
 	@GetMapping
 	public ResponseEntity<?> getPromotions() {
 		try {

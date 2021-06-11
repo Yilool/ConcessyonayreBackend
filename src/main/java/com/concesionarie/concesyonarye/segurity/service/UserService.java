@@ -23,28 +23,61 @@ import com.concesionarie.concesyonarye.segurity.model.dto.ListUserDto;
 import com.concesionarie.concesyonarye.segurity.model.entity.User;
 import com.concesionarie.concesyonarye.segurity.model.repository.UserRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserService.
+ */
 @Service("UserService")
 public class UserService implements UserDetailsService{
+	
+	/** The user repo. */
 	@Autowired
 	private UserRepository userRepo;
+	
+	/** The custom repo. */
 	@Autowired
 	private CustomerRepository customRepo;
+	
+	/** The custom user converter. */
 	@Autowired
 	private CustomerUserDtoConverter customUserConverter;
+	
+	/** The list user converter. */
 	@Autowired
 	private ListUserDtoConverter listUserConverter;
 	
+	/**
+	 * Load user by username.
+	 *
+	 * @param username the username
+	 * @return the user details
+	 * @throws UsernameNotFoundException the username not found exception
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return userRepo.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 	}
 	
+	/**
+	 * Load user by id.
+	 *
+	 * @param id the id
+	 * @return the user details
+	 * @throws AuthenticationException the authentication exception
+	 */
 	public UserDetails loadUserById(Integer id) throws AuthenticationException {
 		return userRepo.findById(id)
 				.orElseThrow(()-> new AuthenticationException("Id not found"));
 	}
 
+	/**
+	 * Creates the new customer user.
+	 *
+	 * @param customerUserDto the customer user dto
+	 * @return the customer user dto
+	 * @throws UserException the user exception
+	 */
 	public CustomerUserDto createNewCustomerUser(CustomerUserDto customerUserDto) throws UserException{
 		User user;
 		// = userRepo.save(customUserConverter.fromCustomerUserDTOToCustomerUser(customerUserDto))
@@ -61,6 +94,13 @@ public class UserService implements UserDetailsService{
 		return customUserConverter.fromUserToCustomerUserDto(userRepo.save(user));
 	}
 	
+	/**
+	 * Creates the new user.
+	 *
+	 * @param userDto the user dto
+	 * @return the customer user dto
+	 * @throws UserException the user exception
+	 */
 	public CustomerUserDto createNewUser(CustomerUserDto userDto) throws UserException{
 		User user;
 		
@@ -74,6 +114,13 @@ public class UserService implements UserDetailsService{
 		return customUserConverter.fromUserToCustomerUserDto(userRepo.save(user));
 	}
 	
+	/**
+	 * Delete user.
+	 *
+	 * @param username the username
+	 * @return the customer user dto
+	 * @throws UserException the user exception
+	 */
 	public CustomerUserDto deleteUser(String username) throws UserException{
 		User user = userRepo.findUserByUsername(username);
 		
@@ -86,6 +133,12 @@ public class UserService implements UserDetailsService{
 		return customUserConverter.fromUserToCustomerUserDto(userRepo.save(user));
 	}
 	
+	/**
+	 * Gets the all users.
+	 *
+	 * @return the all users
+	 * @throws UserException the user exception
+	 */
 	public List<ListUserDto> getAllUsers() throws UserException {
 		List<User> result = (List<User>) userRepo.findAll();
 

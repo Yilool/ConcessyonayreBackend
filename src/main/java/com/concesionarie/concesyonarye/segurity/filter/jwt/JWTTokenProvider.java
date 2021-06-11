@@ -12,9 +12,21 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JWTTokenProvider.
+ */
 public class JWTTokenProvider {
-private static SecretKey key; 
+
+	/** The key. */
+	private static SecretKey key; 
 	
+	/**
+	 * Generate token.
+	 *
+	 * @param user the user
+	 * @return the string
+	 */
 	public static String generateToken(User user) {
         return Jwts.builder()
 				.setHeaderParam(Header.TYPE, Header.JWT_TYPE)
@@ -30,6 +42,12 @@ private static SecretKey key;
 	}
 	
 	
+	/**
+	 * Validate token.
+	 *
+	 * @param token the token
+	 * @return true, if successful
+	 */
 	public static boolean validateToken(String token) {
 		boolean valid = false;
 		try {
@@ -41,6 +59,11 @@ private static SecretKey key;
 		return valid;
 	}
 	
+	/**
+	 * Gets the key.
+	 *
+	 * @return the key
+	 */
 	public static SecretKey getKey() {
 		if(key== null) {
 			key = Keys.hmacShaKeyFor(SecurityConstant.SECRET.getBytes());

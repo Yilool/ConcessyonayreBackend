@@ -20,13 +20,25 @@ import com.concesionarie.concesyonarye.segurity.model.dto.CustomerUserDto;
 import com.concesionarie.concesyonarye.segurity.model.dto.ListUserDto;
 import com.concesionarie.concesyonarye.segurity.service.UserService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	
+	/** The user service. */
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * Sign up.
+	 *
+	 * @param userDTO the user DTO
+	 * @return the response entity
+	 */
 	@PostMapping("/signup")
 	public ResponseEntity<?> signUp(@RequestBody CustomerUserDto userDTO) {
 		try {
@@ -38,6 +50,12 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * Sign in.
+	 *
+	 * @param userDTO the user DTO
+	 * @return the response entity
+	 */
 	@PostMapping("/signin")
 	public ResponseEntity<?> signIn(@RequestBody CustomerUserDto userDTO) {
 		try {
@@ -49,12 +67,23 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param userDTO the user DTO
+	 * @return the response entity
+	 */
 	@PostMapping("/login")
 	public ResponseEntity<CustomerUserDto> login(@RequestBody CustomerUserDto userDTO){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(userDTO);
 	}
 	
+	/**
+	 * Gets the users.
+	 *
+	 * @return the users
+	 */
 	@GetMapping
 	public ResponseEntity<?> getUsers() {
 		ResponseEntity<?> response;
@@ -71,6 +100,12 @@ public class UserController {
 		return response;
 	}
 	
+	/**
+	 * Delete user.
+	 *
+	 * @param username the username
+	 * @return the response entity
+	 */
 	@DeleteMapping(path = "/{username}")
 	public ResponseEntity<?> deleteUser(@PathVariable String username) {
 		ResponseEntity<?> response;

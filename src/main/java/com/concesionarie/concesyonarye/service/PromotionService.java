@@ -14,14 +14,28 @@ import com.concesionarie.concesyonarye.model.dto.PromotionDto;
 import com.concesionarie.concesyonarye.model.entity.Promotion;
 import com.concesionarie.concesyonarye.model.repository.PromotionRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PromotionService.
+ */
 @Service("PromotionService")
 public class PromotionService {
+	
+	/** The promotion repository. */
 	@Autowired
 	private PromotionRepository promotionRepository;
 	
+	/** The promotion dto converter. */
 	@Autowired
 	private PromotionDtoConverter promotionDtoConverter;
 	
+	/**
+	 * Register new promotion.
+	 *
+	 * @param promotionDto the promotion dto
+	 * @return the promotion dto
+	 * @throws PromotionException the promotion exception
+	 */
 	public PromotionDto registerNewPromotion(PromotionDto promotionDto) throws PromotionException {
 		Promotion promotion;
 
@@ -34,6 +48,13 @@ public class PromotionService {
 		return promotionDtoConverter.fromPromotionToPromotionDto(promotionRepository.save(promotion));
 	}
 	
+	/**
+	 * Delete promotion.
+	 *
+	 * @param cod the cod
+	 * @return the promotion dto
+	 * @throws PromotionException the promotion exception
+	 */
 	public PromotionDto deletePromotion(String cod) throws PromotionException {
 		Promotion promotion = promotionRepository.findPromotionById(Integer.parseInt(cod.substring(4)));
 		
@@ -46,6 +67,12 @@ public class PromotionService {
 		return promotionDtoConverter.fromPromotionToPromotionDto(promotionRepository.save(promotion));
 	}
 	
+	/**
+	 * Gets the all promotions.
+	 *
+	 * @return the all promotions
+	 * @throws PromotionException the promotion exception
+	 */
 	public List<PromotionDto> getAllPromotions() throws PromotionException {
 		List<Promotion> promotions = promotionRepository.findAll();
 		

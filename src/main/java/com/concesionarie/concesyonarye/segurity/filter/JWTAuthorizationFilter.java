@@ -24,12 +24,27 @@ import com.concesionarie.concesyonarye.segurity.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JWTAuthorizationFilter.
+ */
 @Component
 @WebFilter
 public class JWTAuthorizationFilter extends OncePerRequestFilter{
+	
+	/** The user service. */
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * Do filter internal.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param chain the chain
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ServletException the servlet exception
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -49,6 +64,12 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter{
         chain.doFilter(request, response);
 	}
 	
+    /**
+     * Gets the authentication.
+     *
+     * @param request the request
+     * @return the authentication
+     */
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(SecurityConstant.HEADER).replace(SecurityConstant.TOKEN_PREFIX, "");
         UsernamePasswordAuthenticationToken upat = null;

@@ -16,13 +16,30 @@ import com.concesionarie.concesyonarye.model.dto.ModelDto;
 import com.concesionarie.concesyonarye.model.entity.Model;
 import com.concesionarie.concesyonarye.model.repository.ModelRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ModelService.
+ */
 @Service("ModelService")
 public class ModelService {
+	
+	/** The model repository. */
 	@Autowired
 	private ModelRepository modelRepository;
+	
+	/** The model dto converter. */
 	@Autowired
 	private ModelDtoConverter modelDtoConverter;
 	
+	/**
+	 * Register new model.
+	 *
+	 * @param modelDto the model dto
+	 * @return the model dto
+	 * @throws ModelException the model exception
+	 * @throws CategoryException the category exception
+	 * @throws BrandException the brand exception
+	 */
 	public ModelDto registerNewModel(ModelDto modelDto) throws ModelException, CategoryException, BrandException {
 		Model model = null;
 		
@@ -35,6 +52,13 @@ public class ModelService {
 		return modelDtoConverter.fromModelToModelDto(modelRepository.save(model));
 	}
 	
+	/**
+	 * Delete model.
+	 *
+	 * @param code the code
+	 * @return the model dto
+	 * @throws ModelException the model exception
+	 */
 	public ModelDto deleteModel(String code) throws ModelException {
 		Model model = modelRepository.findModelById(Integer.parseInt(code.substring(4)));
 		
@@ -47,6 +71,12 @@ public class ModelService {
 		return modelDtoConverter.fromModelToModelDto(modelRepository.save(model));
 	}
 	
+	/**
+	 * Gets the all models.
+	 *
+	 * @return the all models
+	 * @throws ModelException the model exception
+	 */
 	public List<ModelDto> getAllModels() throws ModelException {
 		List<Model> models = modelRepository.findAll();
 		

@@ -18,13 +18,24 @@ import com.concesionarie.concesyonarye.exception.VehicleException;
 import com.concesionarie.concesyonarye.model.dto.PurchaseDto;
 import com.concesionarie.concesyonarye.service.PurchaseService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PurchaseController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/purchase")
 public class PurchaseController {
+	
+	/** The purchase service. */
 	@Autowired
 	private PurchaseService purchaseService;
 	
+	/**
+	 * Gets the customers.
+	 *
+	 * @return the customers
+	 */
 	@GetMapping
 	public ResponseEntity<?> getCustomers() {
 		try {
@@ -34,6 +45,12 @@ public class PurchaseController {
 		}
 	}
 	
+	/**
+	 * New purchase.
+	 *
+	 * @param purchaseDto the purchase dto
+	 * @return the response entity
+	 */
 	@PostMapping
 	public ResponseEntity<?> newPurchase(@RequestBody PurchaseDto purchaseDto) {
 		try {

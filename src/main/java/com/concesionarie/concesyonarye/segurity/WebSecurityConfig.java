@@ -21,23 +21,45 @@ import com.concesionarie.concesyonarye.segurity.model.enumerate.UserRoles;
 import com.concesionarie.concesyonarye.segurity.service.UserService;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WebSecurityConfig.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	/** The jwt authorization filter. */
 	@Autowired
 	private JWTAuthorizationFilter jwtAuthorizationFilter;
+	
+	/** The user service. */
 	@Autowired
 	private UserService userService;
+	
+	/** The password encoder. */
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	/**
+	 * Authentication manager bean.
+	 *
+	 * @return the authentication manager
+	 * @throws Exception the exception
+	 */
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 	    return super.authenticationManagerBean();
 	}
 	
+	/**
+	 * Configure.
+	 *
+	 * @param http the http
+	 * @throws Exception the exception
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
@@ -71,6 +93,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
            				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	
+	/**
+	 * Configure.
+	 *
+	 * @param auth the auth
+	 * @throws Exception the exception
+	 */
 	@Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);

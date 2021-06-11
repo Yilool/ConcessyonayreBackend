@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.concesionarie.concesyonarye.model.entity.Rating;
 
+/**
+ * The Interface RatingRepository.
+ */
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Integer> {
 	

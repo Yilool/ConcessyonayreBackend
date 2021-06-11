@@ -17,13 +17,25 @@ import com.concesionarie.concesyonarye.exception.VehicleException;
 import com.concesionarie.concesyonarye.model.dto.VehicleDto;
 import com.concesionarie.concesyonarye.service.VehicleService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VehicleController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/vehicle")
 public class VehicleController {
+	
+	/** The vehicle service. */
 	@Autowired
 	private VehicleService vehicleService;
 	
+	/**
+	 * New vehicle.
+	 *
+	 * @param vehicleDto the vehicle dto
+	 * @return the response entity
+	 */
 	@PostMapping
 	public ResponseEntity<?> newVehicle(@RequestBody VehicleDto vehicleDto) {
 			try {
@@ -35,6 +47,12 @@ public class VehicleController {
 			}
 	}
 	
+	/**
+	 * Gets the vehicle.
+	 *
+	 * @param cod the cod
+	 * @return the vehicle
+	 */
 	@GetMapping(path = "/{cod}")
 	public ResponseEntity<?> getVehicle(@PathVariable String cod) {
 			try {
@@ -46,6 +64,11 @@ public class VehicleController {
 			}
 	}
 	
+	/**
+	 * Gets the vehicles.
+	 *
+	 * @return the vehicles
+	 */
 	@GetMapping
 	public ResponseEntity<?> getVehicles() {
 			try {

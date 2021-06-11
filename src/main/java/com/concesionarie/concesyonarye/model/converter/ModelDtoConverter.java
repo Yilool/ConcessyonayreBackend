@@ -13,15 +13,32 @@ import com.concesionarie.concesyonarye.model.entity.Model;
 import com.concesionarie.concesyonarye.model.repository.BrandRepository;
 import com.concesionarie.concesyonarye.model.repository.CategoryRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ModelDtoConverter.
+ */
 @Component
 public class ModelDtoConverter {
+	
+	/** The Constant code. */
 	private static final String code = "MOD0";
 	
+	/** The category repository. */
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	/** The brand repository. */
 	@Autowired
 	private BrandRepository brandRepository;
 
+	/**
+	 * From model DTO to model.
+	 *
+	 * @param modelDto the model dto
+	 * @return the model
+	 * @throws CategoryException the category exception
+	 * @throws BrandException the brand exception
+	 */
 	public Model fromModelDTOToModel(ModelDto modelDto) throws CategoryException, BrandException {
 		Model model;
 		
@@ -42,6 +59,12 @@ public class ModelDtoConverter {
 		return model;
 	}
 	
+	/**
+	 * From model to model dto.
+	 *
+	 * @param model the model
+	 * @return the model dto
+	 */
 	public ModelDto fromModelToModelDto(Model model) {
 		ModelDto modelDto = new ModelDto();
 		

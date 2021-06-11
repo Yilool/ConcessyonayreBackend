@@ -23,23 +23,41 @@ import com.concesionarie.concesyonarye.model.repository.PurchaseRepository;
 import com.concesionarie.concesyonarye.model.repository.RatingRepository;
 import com.concesionarie.concesyonarye.model.repository.VehicleRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RatingService.
+ */
 @Service("RatingService")
 public class RatingService {
+	
+	/** The vehicle repository. */
 	@Autowired
 	private VehicleRepository vehicleRepository;
 	
+	/** The rating repository. */
 	@Autowired
 	private RatingRepository ratingRepository;
 	
+	/** The purchase repository. */
 	@Autowired
 	private PurchaseRepository purchaseRepository;
 	
+	/** The customer repository. */
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	/** The vehicle dto converter. */
 	@Autowired
 	private VehicleDtoConverter vehicleDtoConverter;
 	
+	/**
+	 * Gets the customer vehicles.
+	 *
+	 * @param cus the cus
+	 * @return the customer vehicles
+	 * @throws PurchaseException the purchase exception
+	 * @throws CustomerException the customer exception
+	 */
 	public List<VehicleDto> getCustomerVehicles(int cus) throws PurchaseException, CustomerException {
 		List<Purchase> purchases = purchaseRepository.findAll();
 		Customer customer = customerRepository.findCustomerById(cus);
@@ -52,6 +70,14 @@ public class RatingService {
 		return vehicleDtos;
 	}
 	
+	/**
+	 * Rate vehicle.
+	 *
+	 * @param ratingDto the rating dto
+	 * @return the msg dto
+	 * @throws CustomerException the customer exception
+	 * @throws VehicleException the vehicle exception
+	 */
 	public MsgDto rateVehicle(RatingDto ratingDto) throws CustomerException, VehicleException {
 		Vehicle vehicle = vehicleRepository.findVehicleById(Integer.parseInt(ratingDto.getVehicle().substring(4)));
 		Customer customer = customerRepository.findCustomerById(ratingDto.getCustomer());
@@ -73,24 +99,49 @@ public class RatingService {
 		return msg;
 	}
 	
+	/**
+	 * Vehicle exist.
+	 *
+	 * @param vehicle the vehicle
+	 * @throws VehicleException the vehicle exception
+	 */
 	private void vehicleExist(Vehicle vehicle) throws VehicleException {
 		if (vehicle == null) {
 			throw new VehicleException(ExceptionsCode.VEHICLE_NOT_EXISTS);
 		}
 	}
 	
+	/**
+	 * Customer exist.
+	 *
+	 * @param custom the custom
+	 * @throws CustomerException the customer exception
+	 */
 	private void customerExist(Customer custom) throws CustomerException {
 		if (custom == null) {
 			throw new CustomerException(ExceptionsCode.CUSTOMER_NOT_EXISTS);
 		}
 	}
 	
+	/**
+	 * Have purchase.
+	 *
+	 * @param purchases the purchases
+	 * @throws PurchaseException the purchase exception
+	 */
 	private void havePurchase(List<Purchase> purchases) throws PurchaseException {
 		if (purchases.isEmpty()) {
 			throw new PurchaseException(ExceptionsCode.NOT_PURCHASES);
 		}
 	}
 	
+	/**
+	 * Custom vehicles.
+	 *
+	 * @param purchases the purchases
+	 * @param custom the custom
+	 * @return the list
+	 */
 	private List<VehicleDto> customVehicles(List<Purchase> purchases, Customer custom) {
 		List<VehicleDto> vehicleDtos = new ArrayList<>();
 		

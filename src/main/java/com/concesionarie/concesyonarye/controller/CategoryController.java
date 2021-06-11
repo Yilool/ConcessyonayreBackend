@@ -16,13 +16,25 @@ import org.springframework.web.server.ResponseStatusException;
 import com.concesionarie.concesyonarye.exception.CategoryException;
 import com.concesionarie.concesyonarye.service.CategoryService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CategoryController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
+	
+	/** The category service. */
 	@Autowired
 	private CategoryService categoryService;
 	
+	/**
+	 * New category.
+	 *
+	 * @param category the category
+	 * @return the response entity
+	 */
 	@PostMapping
 	public ResponseEntity<?> newCategory(@RequestBody String category) {
 		try {
@@ -34,6 +46,12 @@ public class CategoryController {
 		}
 	}
 	
+	/**
+	 * Delete category.
+	 *
+	 * @param code the code
+	 * @return the response entity
+	 */
 	@DeleteMapping
 	public ResponseEntity<?> deleteCategory(@PathVariable String code) {
 		try {
@@ -45,6 +63,11 @@ public class CategoryController {
 		}
 	}
 	
+	/**
+	 * Gets the categories.
+	 *
+	 * @return the categories
+	 */
 	@GetMapping
 	public ResponseEntity<?> getCategories() {
 		try {

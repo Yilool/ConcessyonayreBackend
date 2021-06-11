@@ -14,14 +14,28 @@ import com.concesionarie.concesyonarye.model.dto.BrandDto;
 import com.concesionarie.concesyonarye.model.entity.Brand;
 import com.concesionarie.concesyonarye.model.repository.BrandRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BrandService.
+ */
 @Service("BrandService")
 public class BrandService {
+	
+	/** The brand repository. */
 	@Autowired
 	private BrandRepository brandRepository;
 	
+	/** The brand dto converter. */
 	@Autowired
 	private BrandDtoConverter brandDtoConverter;
 
+	/**
+	 * Register new brand.
+	 *
+	 * @param name the name
+	 * @return the brand dto
+	 * @throws BrandException the brand exception
+	 */
 	public BrandDto registerNewBrand(String name) throws BrandException {
 		Brand brand;
 
@@ -34,6 +48,13 @@ public class BrandService {
 		return brandDtoConverter.fromBrandToBrandDto(brandRepository.save(brand));
 	}
 
+	/**
+	 * Delete brand.
+	 *
+	 * @param code the code
+	 * @return the brand dto
+	 * @throws BrandException the brand exception
+	 */
 	public BrandDto deleteBrand(String code) throws BrandException {
 		if (!brandRepository.existsById(Integer.parseInt(code.substring(4)))) {
 			throw new BrandException(ExceptionsCode.BRAND_NOT_EXISTS);
@@ -46,6 +67,12 @@ public class BrandService {
 		return brandDtoConverter.fromBrandToBrandDto(brandRepository.save(brand));
 	}
 
+	/**
+	 * Gets the all brands.
+	 *
+	 * @return the all brands
+	 * @throws BrandException the brand exception
+	 */
 	public List<BrandDto> getAllBrands() throws BrandException {
 		List<Brand> brands = brandRepository.findAll();
 

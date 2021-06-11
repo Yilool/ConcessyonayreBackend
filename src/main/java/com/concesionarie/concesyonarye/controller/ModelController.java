@@ -18,13 +18,25 @@ import com.concesionarie.concesyonarye.exception.ModelException;
 import com.concesionarie.concesyonarye.model.dto.ModelDto;
 import com.concesionarie.concesyonarye.service.ModelService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ModelController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/model")
 public class ModelController {
+	
+	/** The Model service. */
 	@Autowired
 	private ModelService ModelService;
 	
+	/**
+	 * New model.
+	 *
+	 * @param modelDto the model dto
+	 * @return the response entity
+	 */
 	@PostMapping
 	public ResponseEntity<?> newModel(@RequestBody ModelDto modelDto) {
 		try {
@@ -38,6 +50,12 @@ public class ModelController {
 		}
 	}
 	
+	/**
+	 * Delete model.
+	 *
+	 * @param code the code
+	 * @return the response entity
+	 */
 	@DeleteMapping
 	public ResponseEntity<?> deleteModel(@PathVariable String code) {
 		try {
@@ -49,6 +67,11 @@ public class ModelController {
 		}
 	}
 	
+	/**
+	 * Gets the models.
+	 *
+	 * @return the models
+	 */
 	@GetMapping
 	public ResponseEntity<?> getModels() {
 		try {

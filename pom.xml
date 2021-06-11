@@ -15,7 +15,7 @@
 	<name>concesyonarye</name>
 	<description>Final project for 2DAW about a concesionarie</description>
 	<properties>
-		<java.version>15</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -14,14 +14,28 @@ import com.concesionarie.concesyonarye.model.dto.CategoryDto;
 import com.concesionarie.concesyonarye.model.entity.Category;
 import com.concesionarie.concesyonarye.model.repository.CategoryRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CategoryService.
+ */
 @Service("CategoryService")
 public class CategoryService {
+	
+	/** The category repository. */
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
+	/** The category dto converter. */
 	@Autowired
 	private CategoryDtoConverter categoryDtoConverter;
 	
+	/**
+	 * Register new category.
+	 *
+	 * @param name the name
+	 * @return the category dto
+	 * @throws CategoryException the category exception
+	 */
 	public CategoryDto registerNewCategory(String name) throws CategoryException {
 		Category category;
 		
@@ -34,6 +48,13 @@ public class CategoryService {
 		return categoryDtoConverter.fromCategoryToCategoryDto(categoryRepository.save(category));
 	}
 	
+	/**
+	 * Delete category.
+	 *
+	 * @param code the code
+	 * @return the category dto
+	 * @throws CategoryException the category exception
+	 */
 	public CategoryDto deleteCategory(String code) throws CategoryException {
 		Category category = categoryRepository.findCategoryById(Integer.parseInt(code.substring(4)));
 		
@@ -46,6 +67,12 @@ public class CategoryService {
 		return categoryDtoConverter.fromCategoryToCategoryDto(categoryRepository.save(category));
 	}
 	
+	/**
+	 * Gets the all categories.
+	 *
+	 * @return the all categories
+	 * @throws CategoryException the category exception
+	 */
 	public List<CategoryDto> getAllCategories() throws CategoryException {
 		List<Category> categories = categoryRepository.findAll();
 		

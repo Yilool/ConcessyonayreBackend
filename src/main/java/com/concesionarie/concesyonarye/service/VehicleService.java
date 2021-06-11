@@ -14,13 +14,28 @@ import com.concesionarie.concesyonarye.model.dto.VehicleDto;
 import com.concesionarie.concesyonarye.model.entity.Vehicle;
 import com.concesionarie.concesyonarye.model.repository.VehicleRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VehicleService.
+ */
 @Service("VehicleService")
 public class VehicleService {
+	
+	/** The vehicle repository. */
 	@Autowired
 	private VehicleRepository vehicleRepository;
+	
+	/** The vehicle dto converter. */
 	@Autowired
 	private VehicleDtoConverter vehicleDtoConverter;
 	
+	/**
+	 * Register new vehicle.
+	 *
+	 * @param vehicleDto the vehicle dto
+	 * @return the vehicle dto
+	 * @throws ModelException the model exception
+	 */
 	public VehicleDto registerNewVehicle(VehicleDto vehicleDto) throws ModelException {
 		Vehicle vehicle = null;
 		
@@ -29,6 +44,13 @@ public class VehicleService {
 		return vehicleDtoConverter.fromVehicleToVehicleDto(vehicleRepository.save(vehicle));
 	}
 	
+	/**
+	 * Gets the vehicle.
+	 *
+	 * @param cod the cod
+	 * @return the vehicle
+	 * @throws VehicleException the vehicle exception
+	 */
 	public VehicleDto getVehicle(String cod) throws VehicleException {
 		Vehicle vehicles = vehicleRepository.findVehicleById(Integer.parseInt(cod.substring(4)));
 		
@@ -39,6 +61,12 @@ public class VehicleService {
 		return vehicleDtoConverter.fromVehicleToVehicleDto(vehicles);
 	}
 	
+	/**
+	 * Gets the all vehicles.
+	 *
+	 * @return the all vehicles
+	 * @throws VehicleException the vehicle exception
+	 */
 	public List<VehicleDto> getAllVehicles() throws VehicleException {
 		List<Vehicle> vehicles = vehicleRepository.findAll();
 		

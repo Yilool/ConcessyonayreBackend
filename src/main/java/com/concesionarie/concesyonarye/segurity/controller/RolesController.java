@@ -11,10 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.concesionarie.concesyonarye.segurity.model.enumerate.UserRoles;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RolesController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/roles")
 public class RolesController {
+	
+	/**
+	 * Gets the roles.
+	 *
+	 * @return the roles
+	 */
 	@GetMapping
 	public ResponseEntity<?> getRoles() {
 		ResponseEntity<?> response;

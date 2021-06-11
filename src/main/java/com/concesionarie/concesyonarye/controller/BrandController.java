@@ -16,13 +16,25 @@ import org.springframework.web.server.ResponseStatusException;
 import com.concesionarie.concesyonarye.exception.BrandException;
 import com.concesionarie.concesyonarye.service.BrandService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BrandController.
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/brand")
 public class BrandController {
+	
+	/** The brand service. */
 	@Autowired
 	private BrandService brandService;
 	
+	/**
+	 * New brand.
+	 *
+	 * @param Brand the brand
+	 * @return the response entity
+	 */
 	@PostMapping
 	public ResponseEntity<?> newBrand(@RequestBody String Brand) {
 		try {
@@ -34,6 +46,12 @@ public class BrandController {
 		}
 	}
 	
+	/**
+	 * Delete brand.
+	 *
+	 * @param code the code
+	 * @return the response entity
+	 */
 	@DeleteMapping
 	public ResponseEntity<?> deleteBrand(@PathVariable String code) {
 		try {
@@ -45,6 +63,11 @@ public class BrandController {
 		}
 	}
 	
+	/**
+	 * Gets the brands.
+	 *
+	 * @return the brands
+	 */
 	@GetMapping
 	public ResponseEntity<?> getBrands() {
 		try {

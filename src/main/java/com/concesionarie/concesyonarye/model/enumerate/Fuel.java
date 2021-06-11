@@ -1,5 +1,19 @@
 package com.concesionarie.concesyonarye.model.enumerate;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum Fuel.
+ */
 public enum Fuel {
-	DIESEL, GASOLINE98, GASOLINE95, ELECTRICITY, GLP
+	
+	/** The diesel. */
+	DIESEL, 
+ /** The gasoline98. */
+ GASOLINE98, 
+ /** The gasoline95. */
+ GASOLINE95, 
+ /** The electricity. */
+ ELECTRICITY, 
+ /** The glp. */
+ GLP
 }

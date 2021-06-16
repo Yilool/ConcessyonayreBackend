@@ -114,7 +114,7 @@ VALUES ('9', 'SERIE 2', '2021-01-01 00:00:00', '9', '7');
 INSERT INTO `concessyonarye`.`model` (`id`, `modelName`, `startDate`, `brand_id`, `category_id`) 
 VALUES ('10', 'MUSTANG', '2021-01-01 00:00:00', '3', '9');
 
-/*Vehicles*/
+/*Vehicles: los vehículos se deba añadir a mano, debido a las imágenes
 INSERT INTO `concessyonarye`.`vehicle` (`id`, `basePrice`, `fuel`, `userseats`, `model_id`) 
 VALUES ('1', '120000', '1', '2', '5');
 INSERT INTO `concessyonarye`.`vehicle` (`id`, `basePrice`, `fuel`, `userseats`, `model_id`) 
@@ -124,7 +124,7 @@ VALUES ('3', '640000', '3', '4', '2');
 INSERT INTO `concessyonarye`.`vehicle` (`id`, `basePrice`, `fuel`, `userseats`, `model_id`) 
 VALUES ('4', '890000', '4', '5', '6');
 INSERT INTO `concessyonarye`.`vehicle` (`id`, `basePrice`, `fuel`, `userseats`, `model_id`) 
-VALUES ('5', '60000', '5', '6', '8');
+VALUES ('5', '60000', '5', '6', '8');*/
 
 /*Promotion*/
 INSERT INTO `concessyonarye`.`promotion` (`id`, `discountPercent`, `promoname`, `startDate`) 
